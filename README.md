@@ -97,6 +97,7 @@ Containers will run in background under stack defined in uedocker/.env, IIQ will
 2. ./uedocker/volumes/app-scripts => Contains scripts to bootstrap the database and also IIQ with the basic xml files.
 3. ./uedocker/volumes/app-ue => Contains the /ue/iiq/tomcat/webapps/ue directory in a read-write capacity so you can make updates directly for testing.
 4. ./uedocker/volumes/web-logs => Contains the /ue/logs/https directory with all the Apache logs for troubleshooting.
+5. ./uedocker/volumes/app-backups:/usr/local/backups => Using this for backups from Object Exporter
 
 ## Ports
 
