@@ -78,7 +78,7 @@
         <delete dir="${build}/extract/WEB-INF/bin/win32" />
         <delete dir="${build}/extract/WEB-INF/bin/win64" />
         
-        <!-- VZ - TC 02-08-2022 - delete vulnerable log4j files -->
+        <!-- TC 02-08-2022 - delete vulnerable log4j files -->
         <delete file="${build}/extract/WEB-INF/lib/log4j-core-2.11.2.jar"/>
         <delete file="${build}/extract/WEB-INF/lib/log4j-1.2-api-2.11.2.jar"/>
         <delete file="${build}/extract/WEB-INF/lib/log4j-api-2.11.2.jar"/>
