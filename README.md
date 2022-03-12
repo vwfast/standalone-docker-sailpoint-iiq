@@ -1,6 +1,26 @@
 SailPoint IdentityIQ Dockerized v2
 ==================================
 
+# Updates made by Tom Culligan
+
+Updated to include 8.1p4 and the following E-Fixes identityiq-8.1p4-IIQCB-4610 and identityiq-8.1p4-IIQPB-1066
+In order to get the E-fixes to apply you need to create the following directory:
+ssb => components => iiq8.1 => base => efix => 8.1p4 and create a .keep file in it so Git doesn't delete the directory
+
+Also modified build.custom.ue-configuration.xml to delete old vulnerable versions of log4j and the iiqIntegration-ITIM.war since it includes and a vulnerable log4j version. Modifications that were added are below:
+
+        <delete file="${build}/extract/WEB-INF/lib/log4j-core-2.11.2.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-1.2-api-2.11.2.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-api-2.11.2.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-jcl-2.11.2.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-slf4j-impl-2.11.2.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-1.2-api-2.16.0.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-api-2.16.0.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-core-2.16.0.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-jcl-2.16.0.jar"/>
+        <delete file="${build}/extract/WEB-INF/lib/log4j-slf4j-impl-2.16.0.jar"/>
+        <delete file="${build}/extract/integration/ITIM/iiqIntegration-ITIM.war"/>
+
 # Migrating From v1 to v2
 
 If you were previously on v1, v2 has breaking changes. The `src` folder has been removed, along with the bootstrapping code that is used to move the binaries to the appropriate locations. Use the `SailPoint Binaries` instructions below to know where these files should be placed. If you are having trouble with the migration, you can backup the `ssb/envconfig` and `ssb/components` folders and place those folders in a fresh copy of this repository.
@@ -10,11 +30,11 @@ If you were previously on v1, v2 has breaking changes. The `src` folder has been
 ## SailPoint Binaries
 
 Please note that IdentityIQ is closed source so you first need to get a license for IdentityIQ.
-To do this, go to <https://community.sailpoint.com/> to download the software (identityiq-8.1.zip & identityiq-8.1p3.jar & ssb-v7.zip).
+To do this, go to <https://community.sailpoint.com/> to download the software (identityiq-8.1.zip & identityiq-8.1p4.jar & ssb-v7.zip).
 
 The file identityiq-8.1.zip can currently be found at: <https://community.sailpoint.com/t5/IdentityIQ-Server-Software/IdentityIQ-8-1/ta-p/158175>
 
-The file identityiq-8.1p3.jar can currently be found at: <https://community.sailpoint.com/t5/IdentityIQ-Server-Software/IdentityIQ-8-1p3/ta-p/190689>
+The file identityiq-8.1p4.jar can currently be found at: <https://community.sailpoint.com/t5/IdentityIQ-Server-Software/IdentityIQ-8-1p4/ta-p/207213>
 
 The file ssb-v7.zip can currently be found at: <https://community.sailpoint.com/t5/Professional-Services/Services-Standard-Build-SSB-v7/ta-p/190496>
 
@@ -23,7 +43,8 @@ Once you clone the repository, you will put the downloaded files into the proper
 The file locations should be as follows:
 
  * `identityiq-8.1.zip`: ssb => components => iiq8.1 => base => ga
- * `identityiq-8.1p3.jar`: ssb => components => iiq8.1 => base => patch
+ * `identityiq-8.1p4.jar`: ssb => components => iiq8.1 => base => patch
+  * `E-fix files`: ssb => components => iiq8.1 => base => efix => 8.1p4
  * `ssb-v7.zip`: ssb => components => ssb-v7
 
 This does not include **ANY** SailPoint proprietary code and can only be used if you get these binaries from Compass.
@@ -62,7 +83,7 @@ Add the following `127.0.0.1 dev.icam.local`
 
 # Description
 
-This installation will provide you a working instance of SailPoint IdentityIQ 8.1p3 running with OpenJDK and Tomcat 9 in a Docker container.
+This installation will provide you a working instance of SailPoint IdentityIQ 8.1p4 running with OpenJDK and Tomcat 9 in a Docker container.
 
 An additional container is built utilizing MySQL to host the IdentityIQ database and an Apache HTTP Server proxying the connections back to Tomcat.
 
